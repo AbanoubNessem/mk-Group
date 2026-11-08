@@ -1,0 +1,40 @@
+===========================================
+إنشاء قاعدة البيانات mk_group في phpMyAdmin
+===========================================
+
+الخطوات:
+
+1. افتح phpMyAdmin: http://localhost/phpmyadmin
+
+2. اضغط على تبويب "SQL" في الأعلى
+
+3. انسخ والصق هذا الأمر:
+
+CREATE DATABASE IF NOT EXISTS `mk_group` 
+CHARACTER SET utf8mb4 
+COLLATE utf8mb4_unicode_ci;
+
+4. اضغط "Go" أو "تنفيذ"
+
+5. بعد ذلك ستجد قاعدة البيانات "mk_group" في القائمة الجانبية
+
+6. إذا كنت تريد نسخ البيانات من ag_designss:
+   - اختر قاعدة البيانات mk_group من القائمة
+   - افتح تبويب SQL
+   - انسخ محتوى ملف: database/create_mk_group_database.sql
+   - الصقه واضغط Go
+
+7. بعد ذلك قم بتحديث ملف .env:
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=mk_group
+   DB_USERNAME=root
+   DB_PASSWORD=
+
+8. شغّل:
+   php artisan config:clear
+   php artisan cache:clear
+
+===========================================
+
