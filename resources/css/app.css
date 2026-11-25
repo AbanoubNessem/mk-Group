@@ -1,11 +1,258 @@
-@import 'tailwindcss';
+/*
+ * MK Group — public site design system
+ * Tailwind CSS v4. Brand palette only: the default Tailwind colours are reset
+ * so nothing off-brand can slip into templates.
+ */
+@import 'tailwindcss' source(none);
+@import './fonts.css';
+@import './tokens.css';
+@import './site/gallery.css';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+/* Public site templates only — the dashboard has its own stylesheet */
+@source '../views/home.blade.php';
+@source '../views/project.blade.php';
+@source '../views/pages';
+@source '../views/partials/site';
+@source '../views/components/layouts/site.blade.php';
+@source '../views/components/site';
+@source '../views/components/ui';
+@source '../views/components/project';
+@source '../js/site';
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+
+/* ---------------------------------------------------------------- base */
+@layer base {
+    html {
+        color-scheme: light;
+        -webkit-text-size-adjust: 100%;
+        text-rendering: optimizeLegibility;
+        scroll-padding-top: 6rem;
+    }
+
+    body {
+        @apply bg-ivory font-sans text-base text-charcoal antialiased;
+    }
+
+    /* Arabic needs more room: slightly larger body, taller lines, no tracking */
+    :lang(ar) body {
+        font-size: 1.125rem;
+        line-height: 1.85;
+    }
+    :lang(ar) .font-display {
+        letter-spacing: 0;
+    }
+
+    h1, h2, h3, h4 {
+        @apply font-display text-charcoal;
+        text-wrap: balance;
+        font-weight: 400;
+    }
+
+    p {
+        text-wrap: pretty;
+    }
+
+    a {
+        color: inherit;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.25em;
+    }
+
+    ::selection {
+        background: var(--color-slate);
+        color: var(--color-white);
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-slate-deep);
+        outline-offset: 3px;
+    }
+    .on-dark :focus-visible {
+        outline-color: var(--color-white);
+    }
+
+    img, video {
+        max-width: 100%;
+        height: auto;
+    }
+
+    [x-cloak], [hidden] {
+        display: none !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
 }
+
+/* ---------------------------------------------------------------- utilities */
+@utility shell {
+    width: 100%;
+    max-width: var(--container-page);
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+}
+
+@utility display-xl {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(2.5rem, 1.4rem + 4.6vw, 5.75rem);
+    line-height: 1.02;
+    letter-spacing: var(--tracking-display);
+}
+
+@utility display-lg {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(2.125rem, 1.4rem + 2.8vw, 4rem);
+    line-height: 1.06;
+    letter-spacing: var(--tracking-display);
+}
+
+@utility display-md {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.625rem, 1.2rem + 1.5vw, 2.5625rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+}
+
+@utility measure {
+    max-width: 65ch;
+}
+
+/* Flip directional icons in RTL */
+@utility rtl-flip {
+    &:where([dir='rtl'] *) {
+        transform: scaleX(-1);
+    }
+}
+
+/* ---------------------------------------------------------------- components */
+@layer components {
+    /* Buttons — one shape for the whole system */
+    .btn {
+        @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-[var(--radius-control)] px-6 text-sm font-medium whitespace-nowrap select-none;
+        transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .btn-primary {
+        @apply bg-charcoal text-white hover:bg-slate-deep;
+    }
+    .btn-brand {
+        @apply bg-slate-deep text-white hover:bg-charcoal;
+    }
+    .btn-outline {
+        @apply border border-charcoal text-charcoal hover:bg-charcoal hover:text-white;
+    }
+    .btn-light {
+        @apply bg-white text-charcoal hover:bg-stone;
+    }
+    .btn-outline-light {
+        @apply border border-white/70 text-white hover:bg-white hover:text-charcoal;
+    }
+    .btn[disabled], .btn[aria-disabled='true'] {
+        @apply pointer-events-none opacity-60;
+    }
+
+    /* Quiet text link with a drawn underline */
+    .link {
+        @apply font-medium underline decoration-slate/50 underline-offset-[0.3em] hover:decoration-charcoal;
+        transition: text-decoration-color 0.2s;
+    }
+
+    /* Form fields */
+    .field-label {
+        @apply mb-2 block text-sm font-medium text-charcoal;
+    }
+    .field-input {
+        @apply block w-full rounded-[var(--radius-control)] border border-slate bg-white px-4 py-3 text-base text-charcoal placeholder:text-charcoal-soft/70;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field-input:focus {
+        @apply border-charcoal outline-none;
+        box-shadow: 0 0 0 1px var(--color-charcoal);
+    }
+    .field-input[aria-invalid='true'] {
+        @apply border-error;
+        box-shadow: 0 0 0 1px var(--color-error);
+    }
+    .field-error {
+        @apply mt-2 text-sm text-error;
+    }
+
+    /*
+     * Dimension line — the signature device of the identity.
+     * |←── 350 m² ──→|  drawn like an architectural dimension.
+     */
+    .dimension {
+        --dim-color: currentColor;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-variant-numeric: tabular-nums;
+    }
+    .dimension::before,
+    .dimension::after {
+        content: '';
+        flex: 1 1 auto;
+        min-width: 1.5rem;
+        height: 9px;
+        background:
+            linear-gradient(var(--dim-color), var(--dim-color)) center / 100% 1px no-repeat;
+        border-inline-start: 1px solid var(--dim-color);
+    }
+    .dimension::after {
+        border-inline-start: 0;
+        border-inline-end: 1px solid var(--dim-color);
+    }
+    .dimension > span {
+        flex: none;
+        white-space: nowrap;
+    }
+
+    /* Hero load sequence — the one orchestrated motion moment */
+    .reveal-image {
+        animation: reveal-image 1.3s var(--ease-architect) both;
+    }
+    .reveal-line {
+        transform-origin: left center;
+        animation: reveal-line 1.1s 0.35s var(--ease-architect) both;
+    }
+    [dir='rtl'] .reveal-line {
+        transform-origin: right center;
+    }
+    .reveal-text {
+        animation: reveal-text 0.9s 0.55s var(--ease-architect) both;
+    }
+}
+
+@keyframes reveal-image {
+    from { clip-path: inset(0 0 0 100%); }
+    to { clip-path: inset(0 0 0 0); }
+}
+[dir='rtl'] .reveal-image {
+    animation-name: reveal-image-rtl;
+}
+@keyframes reveal-image-rtl {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+}
+@keyframes reveal-line {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+@keyframes reveal-text {
+    from { opacity: 0; transform: translateY(0.75rem); }
+    to { opacity: 1; transform: none; }
+}
+
+/* Screenshot/test hook: skip entrance motion */
+.shot .reveal-image, .shot .reveal-line, .shot .reveal-text {
+    animation: none;
+}
+

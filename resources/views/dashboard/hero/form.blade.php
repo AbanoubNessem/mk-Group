@@ -73,7 +73,7 @@
 
         <div style="margin-top: 30px;">
             <button type="submit" class="btn btn-success">حفظ</button>
-            <a href="{{ route('dashboard.hero') }}" class="btn" style="background: #95a5a6; color: white;">إلغاء</a>
+            <a href="{{ route('dashboard.hero') }}" class="btn">إلغاء</a>
         </div>
     </form>
 </div>

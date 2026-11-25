@@ -16,6 +16,11 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Http\Middleware\ValidatePostSize::class,
             \App\Http\Middleware\BypassPostSizeValidation::class
         );
+
+        // SEO: language from the URL (?lang=ar|en), so Google and AI crawlers index both languages
+        $middleware->web(append: [
+            \App\Http\Middleware\SetLocaleFromUrl::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

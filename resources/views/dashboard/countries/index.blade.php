@@ -7,13 +7,13 @@
 
 <div class="content-box">
     @if(session('success'))
-        <div class="alert alert-success" style="background: #27ae60; color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+        <div class="alert alert-success" style="background: #3f6652; color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
             {{ session('success') }}
         </div>
     @endif
 
     @if(session('error'))
-        <div class="alert alert-danger" style="background: #e74c3c; color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+        <div class="alert alert-danger" style="background: #9a3b31; color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
             {{ session('error') }}
         </div>
     @endif

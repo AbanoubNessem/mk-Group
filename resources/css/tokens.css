@@ -1,0 +1,57 @@
+/* MK Group brand tokens — shared by the public site (app.css) and the dashboard (dashboard.css). */
+@theme {
+    /* ---- Colour: approved MK Group brand board ---- */
+    --color-*: initial;
+    --color-white: #ffffff;
+    --color-ivory: #f3f1ed;
+    --color-stone: #d5d0c8;
+    --color-slate: #6f7c82;      /* primary brand colour — surfaces, large type, rules */
+    --color-charcoal: #30383c;   /* text, dark sections */
+
+    /* Tonal steps of the brand colours, for accessible text and states */
+    --color-slate-deep: #56636a; /* slate that passes WCAG AA for small text on ivory/white */
+    --color-slate-mist: #e3e5e4; /* very light slate wash */
+    --color-charcoal-soft: #5a6266; /* secondary text, AA on ivory */
+    --color-charcoal-deep: #262d30; /* dark section base */
+    --color-stone-soft: #e7e3dc;
+
+    /* Status (used sparingly in forms / notices only) */
+    --color-error: #9a3b31;
+    --color-success: #3f6652;
+
+    /* ---- Type ---- */
+    --font-display: 'Alexandria', 'IBM Plex Sans Arabic', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'IBM Plex Sans Arabic', ui-sans-serif, system-ui, sans-serif;
+
+    /* Modular scale, ratio 1.25 from a 17px body */
+    --text-xs: 0.8125rem;
+    --text-xs--line-height: 1.45;
+    --text-sm: 0.9375rem;
+    --text-sm--line-height: 1.55;
+    --text-base: 1.0625rem;
+    --text-base--line-height: 1.65;
+    --text-lg: 1.3125rem;
+    --text-lg--line-height: 1.5;
+    --text-xl: 1.625rem;
+    --text-xl--line-height: 1.3;
+    --text-2xl: 2.0625rem;
+    --text-2xl--line-height: 1.2;
+    --text-3xl: 2.5625rem;
+    --text-3xl--line-height: 1.12;
+    --text-4xl: 3.1875rem;
+    --text-4xl--line-height: 1.06;
+    --text-5xl: 4rem;
+    --text-5xl--line-height: 1.02;
+
+    --tracking-display: -0.02em;
+
+    /* ---- Space & layout ---- */
+    --spacing: 0.25rem;
+    --container-prose: 40rem;
+    --container-page: 90rem;
+
+    --radius-control: 2px;
+
+    --ease-architect: cubic-bezier(0.2, 0.7, 0.1, 1);
+    --animate-none: none;
+}

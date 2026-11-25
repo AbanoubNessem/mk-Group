@@ -31,7 +31,7 @@
                             @if($project->thumbnail)
                                 <img src="{{ asset('storage/' . $project->thumbnail) }}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
                             @else
-                                <span style="color: #7f8c8d;">-</span>
+                                <span style="color: #5a6266;">-</span>
                             @endif
                         </td>
                         <td>{{ $project->name }}</td>

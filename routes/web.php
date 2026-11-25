@@ -2,14 +2,27 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\SeoController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
+
+// SEO files for Google, Bing and AI assistants (delete public/robots.txt so this one is served)
+Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
+Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
+Route::get('/llms.txt', [SeoController::class, 'llms'])->name('llms');
 
 // Language switching route
 Route::get('/locale/{lang}', [HomeController::class, 'switchLocale'])->name('locale.switch');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/project/{id?}', [HomeController::class, 'project'])->name('project');
+
+// Public pages added in the redesign (read-only)
+Route::get('/projects', [SiteController::class, 'projects'])->name('projects');
+Route::get('/services', [SiteController::class, 'services'])->name('services');
+Route::get('/about', [SiteController::class, 'about'])->name('about');
+Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
 
 // API Routes for projects
 Route::get('/api/projects', [HomeController::class, 'getProjects'])->name('api.projects');

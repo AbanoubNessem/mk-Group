@@ -60,58 +60,49 @@
     @endif
 </div>
 
-<!-- Modal for showing full message -->
-<div id="messageModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
-    <div style="background: white; padding: 30px; border-radius: 8px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <h2 style="margin: 0;">تفاصيل الرسالة</h2>
-            <button onclick="closeMessage()" style="background: #e74c3c; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">إغلاق</button>
-        </div>
-        <div id="messageContent">
-            <!-- Message content will be inserted here -->
-        </div>
+<!-- Message details. Values are inserted with textContent only (visitor input is untrusted). -->
+<dialog id="messageModal" class="m-auto w-[min(40rem,92vw)] border border-stone bg-white p-0 text-charcoal backdrop:bg-charcoal-deep/50" aria-labelledby="messageModalTitle">
+    <div class="flex items-center justify-between gap-4 border-b border-stone px-6 py-4">
+        <h2 id="messageModalTitle">تفاصيل الرسالة</h2>
+        <button type="button" class="btn btn-ghost" onclick="closeMessage()">إغلاق</button>
     </div>
-</div>
+    <dl class="grid grid-cols-[8rem_1fr] gap-x-4 gap-y-3 px-6 py-5 text-sm">
+        <dt class="text-charcoal-soft">الاسم</dt><dd data-f="name"></dd>
+        <dt class="text-charcoal-soft">البريد الإلكتروني</dt><dd><a data-f="email" class="underline" dir="ltr"></a></dd>
+        <dt class="text-charcoal-soft">رقم التليفون</dt><dd><a data-f="phone" class="underline" dir="ltr"></a></dd>
+        <dt class="text-charcoal-soft">نوع المشروع</dt><dd data-f="projectType"></dd>
+        <dt class="text-charcoal-soft">التاريخ</dt><dd data-f="date" dir="ltr" class="text-end"></dd>
+    </dl>
+    <div class="px-6 pb-6">
+        <p class="mb-2 text-sm text-charcoal-soft">الرسالة</p>
+        <div data-f="message" class="max-h-[50vh] overflow-y-auto bg-ivory p-4 whitespace-pre-wrap"></div>
+    </div>
+</dialog>
 
 <script>
 function showMessage(id, name, email, phone, projectType, message, date) {
     const modal = document.getElementById('messageModal');
-    const content = document.getElementById('messageContent');
-    
-    content.innerHTML = `
-        <div style="margin-bottom: 15px;">
-            <strong>الاسم:</strong> ${name}
-        </div>
-        <div style="margin-bottom: 15px;">
-            <strong>البريد الإلكتروني:</strong> <a href="mailto:${email}">${email}</a>
-        </div>
-        <div style="margin-bottom: 15px;">
-            <strong>رقم التليفون:</strong> ${phone ? `<a href="tel:${phone}">${phone}</a>` : '-'}
-        </div>
-        <div style="margin-bottom: 15px;">
-            <strong>نوع المشروع:</strong> ${projectType || '-'}
-        </div>
-        <div style="margin-bottom: 15px;">
-            <strong>التاريخ:</strong> ${date}
-        </div>
-        <div style="margin-bottom: 15px;">
-            <strong>الرسالة:</strong>
-            <div style="margin-top: 10px; padding: 15px; background: #f8f9fa; border-radius: 5px; white-space: pre-wrap;">${message}</div>
-        </div>
-    `;
-    
-    modal.style.display = 'flex';
+    const set = (key, value) => { modal.querySelector('[data-f="' + key + '"]').textContent = value || '-'; };
+    set('name', name);
+    set('projectType', projectType);
+    set('date', date);
+    set('message', message);
+    const emailEl = modal.querySelector('[data-f="email"]');
+    emailEl.textContent = email || '-';
+    email ? emailEl.setAttribute('href', 'mailto:' + encodeURIComponent(email).replace('%40', '@')) : emailEl.removeAttribute('href');
+    const phoneEl = modal.querySelector('[data-f="phone"]');
+    phoneEl.textContent = phone || '-';
+    phone ? phoneEl.setAttribute('href', 'tel:' + String(phone).replace(/[^\d+]/g, '')) : phoneEl.removeAttribute('href');
+    modal.showModal();
 }
 
 function closeMessage() {
-    document.getElementById('messageModal').style.display = 'none';
+    document.getElementById('messageModal').close();
 }
 
-// Close modal when clicking outside
-document.getElementById('messageModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeMessage();
-    }
+// Close when clicking the backdrop
+document.getElementById('messageModal').addEventListener('click', function (e) {
+    if (e.target === this) closeMessage();
 });
 </script>
 @endsection

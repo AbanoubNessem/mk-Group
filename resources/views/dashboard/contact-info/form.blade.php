@@ -28,19 +28,19 @@
         <div class="form-group">
             <label>أرقام الهاتف (سطر واحد لكل رقم)</label>
             <textarea name="phone_numbers" class="form-control" rows="5" placeholder="+20 01200481113&#10;+20 01287444996">{{ old('phone_numbers', $contactInfo->phone_numbers ? implode("\n", $contactInfo->phone_numbers) : '') }}</textarea>
-            <small style="color: #7f8c8d;">ضع كل رقم في سطر منفصل</small>
+            <small style="color: #5a6266;">ضع كل رقم في سطر منفصل</small>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
             <div class="form-group">
                 <label>ساعات العمل (إنجليزي)</label>
                 <textarea name="hours_text" class="form-control" rows="4">{{ old('hours_text', $contactInfo->hours_text) }}</textarea>
-                <small style="color: #7f8c8d;">يمكنك استخدام &lt;br&gt; للسطر الجديد</small>
+                <small style="color: #5a6266;">يمكنك استخدام &lt;br&gt; للسطر الجديد</small>
             </div>
             <div class="form-group">
                 <label>ساعات العمل (عربي)</label>
                 <textarea name="hours_text_ar" class="form-control" rows="4">{{ old('hours_text_ar', $contactInfo->hours_text_ar) }}</textarea>
-                <small style="color: #7f8c8d;">يمكنك استخدام &lt;br&gt; للسطر الجديد</small>
+                <small style="color: #5a6266;">يمكنك استخدام &lt;br&gt; للسطر الجديد</small>
             </div>
         </div>
 

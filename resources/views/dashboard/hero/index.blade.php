@@ -38,7 +38,7 @@
                                 @if($slide->image)
                                     <img src="{{ asset('storage/' . $slide->image) }}" style="max-width: 80px; max-height: 60px; border-radius: 5px; object-fit: cover;">
                                 @else
-                                    <span style="color: #999;">-</span>
+                                    <span style="color: #5a6266;">-</span>
                                 @endif
                             </td>
                             <td>
@@ -48,28 +48,28 @@
                                 <strong>{{ $slide->title_ar ?? '-' }}</strong>
                             </td>
                             <td>
-                                <small style="color: #666;">{{ Str::limit($slide->subtitle ?? '-', 50) }}</small>
+                                <small style="color: #5a6266;">{{ Str::limit($slide->subtitle ?? '-', 50) }}</small>
                             </td>
                             <td>
-                                <small style="color: #666;">{{ Str::limit($slide->subtitle_ar ?? '-', 50) }}</small>
+                                <small style="color: #5a6266;">{{ Str::limit($slide->subtitle_ar ?? '-', 50) }}</small>
                             </td>
                             <td>
-                                <span style="background: #f0f0f0; padding: 4px 8px; border-radius: 4px; font-size: 12px;">
+                                <span style="background: #f3f1ed; padding: 4px 8px; border-radius: 4px; font-size: 12px;">
                                     {{ $slide->button_text ?? '-' }}
                                 </span>
                             </td>
                             <td>
-                                <span style="background: #f0f0f0; padding: 4px 8px; border-radius: 4px; font-size: 12px;">
+                                <span style="background: #f3f1ed; padding: 4px 8px; border-radius: 4px; font-size: 12px;">
                                     {{ $slide->button_text_ar ?? '-' }}
                                 </span>
                             </td>
                             <td>
                                 @if($slide->button_link)
-                                    <a href="{{ $slide->button_link }}" target="_blank" style="color: #3498db; font-size: 12px;">
+                                    <a href="{{ $slide->button_link }}" target="_blank" style="color: #56636a; font-size: 12px;">
                                         {{ Str::limit($slide->button_link, 30) }}
                                     </a>
                                 @else
-                                    <span style="color: #999;">-</span>
+                                    <span style="color: #5a6266;">-</span>
                                 @endif
                             </td>
                             <td>

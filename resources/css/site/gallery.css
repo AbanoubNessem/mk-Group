@@ -1,0 +1,159 @@
+/* Project media: fullscreen lightbox, before/after comparison, video */
+
+/* ---- Lightbox (native <dialog>) ---- */
+.lightbox {
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--color-charcoal-deep);
+    color: #fff;
+}
+.lightbox::backdrop {
+    background: rgb(38 45 48 / 0.9);
+}
+.lightbox[open] {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    animation: lightbox-in 0.25s ease-out;
+}
+@keyframes lightbox-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.lightbox-stage {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 0;
+    padding: 0 clamp(0.5rem, 5vw, 5rem);
+    touch-action: pan-y;
+}
+.lightbox-stage img {
+    max-width: 100%;
+    max-height: calc(100dvh - 9rem);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+.lightbox-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid rgb(255 255 255 / 0.35);
+    border-radius: 2px;
+    color: #fff;
+    background: transparent;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+.lightbox-btn:hover {
+    background: rgb(255 255 255 / 0.1);
+    border-color: #fff;
+}
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+}
+.lightbox-nav[data-dir='prev'] { inset-inline-start: clamp(0.5rem, 2vw, 1.5rem); }
+.lightbox-nav[data-dir='next'] { inset-inline-end: clamp(0.5rem, 2vw, 1.5rem); }
+
+/* ---- Before / after comparison ---- */
+.compare {
+    --pos: 50%;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    touch-action: pan-y;
+    background: var(--color-stone);
+}
+.compare img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+.compare-after {
+    position: absolute;
+    inset: 0;
+    clip-path: inset(0 0 0 var(--pos));
+}
+[dir='rtl'] .compare-after {
+    clip-path: inset(0 var(--pos) 0 0);
+}
+.compare-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    inset-inline-start: var(--pos);
+    width: 0;
+    pointer-events: none;
+}
+.compare-handle::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: -0.5px;
+    width: 1px;
+    background: #fff;
+}
+.compare-grip {
+    position: absolute;
+    top: 50%;
+    inset-inline-start: 0;
+    translate: -50% -50%;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 2px;
+    background: #fff;
+    color: var(--color-charcoal);
+}
+[dir='rtl'] .compare-grip {
+    translate: 50% -50%;
+}
+.compare-range {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: ew-resize;
+}
+.compare-range:focus-visible + .compare-handle .compare-grip {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+.compare-tag {
+    position: absolute;
+    bottom: 1rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8125rem;
+    background: rgb(38 45 48 / 0.75);
+    color: #fff;
+    pointer-events: none;
+}
+
+/* ---- Responsive video ---- */
+.video-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--color-charcoal-deep);
+}
+.video-frame iframe,
+.video-frame video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}

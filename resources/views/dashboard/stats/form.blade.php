@@ -15,7 +15,7 @@
         <div class="form-group">
             <label>القيمة *</label>
             <input type="text" name="value" class="form-control" value="{{ old('value', $stat->value) }}" required placeholder="مثل: 500+ أو 15">
-            <small style="color: #7f8c8d;">يمكن إضافة رموز مثل + أو %</small>
+            <small style="color: #5a6266;">يمكن إضافة رموز مثل + أو %</small>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -44,7 +44,7 @@
 
         <div style="margin-top: 30px;">
             <button type="submit" class="btn btn-success">حفظ</button>
-            <a href="{{ route('dashboard.stats') }}" class="btn" style="background: #95a5a6; color: white;">إلغاء</a>
+            <a href="{{ route('dashboard.stats') }}" class="btn">إلغاء</a>
         </div>
     </form>
 </div>

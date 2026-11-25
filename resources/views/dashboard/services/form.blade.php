@@ -42,7 +42,7 @@
             <div class="form-group">
                 <label>الرابط (Slug)</label>
                 <input type="text" name="slug" class="form-control" value="{{ old('slug', $service->slug) }}">
-                <small style="color: #7f8c8d;">سيتم إنشاؤه تلقائياً إذا لم يتم تحديده</small>
+                <small style="color: #5a6266;">سيتم إنشاؤه تلقائياً إذا لم يتم تحديده</small>
             </div>
         </div>
 
@@ -79,7 +79,7 @@
 
         <div style="margin-top: 30px;">
             <button type="submit" class="btn btn-success">حفظ</button>
-            <a href="{{ route('dashboard.services') }}" class="btn" style="background: #95a5a6; color: white;">إلغاء</a>
+            <a href="{{ route('dashboard.services') }}" class="btn">إلغاء</a>
         </div>
     </form>
 </div>

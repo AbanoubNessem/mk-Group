@@ -15,7 +15,7 @@
         <div class="form-group">
             <label>مفتاح القسم (Section Key) *</label>
             <input type="text" name="section_key" class="form-control" value="{{ old('section_key', $section->section_key) }}" required>
-            <small style="color: #7f8c8d;">مثل: hero, about_preview, etc.</small>
+            <small style="color: #5a6266;">مثل: hero, about_preview, etc.</small>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -102,7 +102,7 @@
 
         <div style="margin-top: 30px;">
             <button type="submit" class="btn btn-success">حفظ</button>
-            <a href="{{ route('dashboard.home') }}" class="btn" style="background: #95a5a6; color: white;">إلغاء</a>
+            <a href="{{ route('dashboard.home') }}" class="btn">إلغاء</a>
         </div>
     </form>
 </div>
